@@ -34,16 +34,6 @@ class InventreePlus(InvenTreePlugin, LocateMixin, EventMixin, SettingsMixin, Lab
             'name': _('HMAC key'),
             'description': _('Enter HMAC key for auth'),
             'required': True,
-        },
-        'LABEL_WIDTH':{
-            'name': _('Label width'),
-            'description': _('If you are using label printer, write down the width of the label'),
-            'required': False,
-        },
-        'LABEL_HEIGHT':{
-            'name': _('Label height'),
-            'description': _('If you are using label printer, write down the height of the label'),
-            'required': False,
         }
     }
 
@@ -98,8 +88,4 @@ class InventreePlus(InvenTreePlugin, LocateMixin, EventMixin, SettingsMixin, Lab
 
     def print_label(self, **kwargs):
         # send label for printing
-
-        width = self.get_setting('LABEL_WIDTH')
-        height = self.get_setting('LABEL_HEIGHT')
-
-        self.submit_webhook({"action":"label/print","results":kwargs,"label_printer":{"width":width,"height":height}})
+        self.submit_webhook({"action":"label/print","results":kwargs})
